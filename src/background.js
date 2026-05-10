@@ -1,4 +1,3 @@
-import { translate } from "@vitalets/google-translate-api";
 import {
   DEFAULT_CONTACT_LANGUAGE,
   DEFAULT_YOUR_LANGUAGE,
@@ -41,15 +40,16 @@ async function translateMessage(text) {
     targetLanguage: DEFAULT_CONTACT_LANGUAGE,
     yourLanguage: DEFAULT_YOUR_LANGUAGE,
     contactLanguage: DEFAULT_CONTACT_LANGUAGE,
-    translationProvider: "vitalets",
+    translationProvider: "googleOfficial",
     openaiApiKey: "",
     googleCloudApiKey: ""
   });
 
   const sourceLanguage = getLanguageCode(yourLanguage, DEFAULT_YOUR_LANGUAGE);
   const targetLanguageCode = getLanguageCode(contactLanguage || targetLanguage, DEFAULT_CONTACT_LANGUAGE);
+  const provider = normalizeTranslationProvider(translationProvider);
 
-  if (translationProvider === "openai") {
+  if (provider === "openai") {
     return translateWithOpenAI({
       text: normalizedText,
       sourceLanguage,
@@ -58,28 +58,16 @@ async function translateMessage(text) {
     });
   }
 
-  if (translationProvider === "googleOfficial") {
-    return translateWithGoogleOfficial({
-      text: normalizedText,
-      sourceLanguage,
-      targetLanguage: targetLanguageCode,
-      apiKey: googleCloudApiKey
-    });
-  }
-
-  return translateWithVitalets({
+  return translateWithGoogleOfficial({
     text: normalizedText,
     sourceLanguage,
-    targetLanguage: targetLanguageCode
+    targetLanguage: targetLanguageCode,
+    apiKey: googleCloudApiKey
   });
 }
 
-async function translateWithVitalets({ text, sourceLanguage, targetLanguage }) {
-  const result = await translate(text, {
-    from: sourceLanguage,
-    to: targetLanguage
-  });
-  return normalizeTranslatedText(result?.text);
+function normalizeTranslationProvider(provider) {
+  return provider === "openai" ? "openai" : "googleOfficial";
 }
 
 async function translateWithGoogleOfficial({ text, sourceLanguage, targetLanguage, apiKey }) {
@@ -221,10 +209,6 @@ function getFriendlyTranslationError(error) {
 
   if (lowerMessage.includes("google_official_429")) {
     return "A cota da Google Cloud Translation foi excedida. Verifique limites e billing.";
-  }
-
-  if (lowerMessage.includes("too many requests") || lowerMessage.includes("429")) {
-    return "O Google não oficial limitou as tentativas. Aguarde um pouco ou troque o serviço no popup.";
   }
 
   if (lowerMessage.includes("403") || lowerMessage.includes("blocked")) {

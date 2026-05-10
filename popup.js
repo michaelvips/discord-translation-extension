@@ -7,7 +7,6 @@ import {
 const yourLanguageSelect = document.getElementById("your-language");
 const contactLanguageSelect = document.getElementById("contact-language");
 const translationProviderSelect = document.getElementById("translation-provider");
-const vitaletsWarning = document.getElementById("vitalets-warning");
 const googleKeyFields = document.getElementById("google-key-fields");
 const googleCloudApiKeyInput = document.getElementById("google-cloud-api-key");
 const openaiKeyFields = document.getElementById("openai-key-fields");
@@ -53,7 +52,7 @@ async function restoreSettings() {
     targetLanguage: DEFAULT_CONTACT_LANGUAGE,
     yourLanguage: DEFAULT_YOUR_LANGUAGE,
     contactLanguage: DEFAULT_CONTACT_LANGUAGE,
-    translationProvider: "vitalets",
+    translationProvider: "googleOfficial",
     openaiApiKey: "",
     googleCloudApiKey: "",
     translationEnabled: true
@@ -61,7 +60,7 @@ async function restoreSettings() {
 
   yourLanguageSelect.value = yourLanguage || DEFAULT_YOUR_LANGUAGE;
   contactLanguageSelect.value = contactLanguage || targetLanguage || DEFAULT_CONTACT_LANGUAGE;
-  translationProviderSelect.value = translationProvider || "vitalets";
+  translationProviderSelect.value = normalizeTranslationProvider(translationProvider);
   openaiApiKeyInput.value = openaiApiKey || "";
   googleCloudApiKeyInput.value = googleCloudApiKey || "";
   translationEnabledInput.checked = Boolean(translationEnabled);
@@ -71,15 +70,18 @@ async function restoreSettings() {
 function updateProviderFields() {
   const provider = translationProviderSelect.value;
 
-  vitaletsWarning.hidden = provider !== "vitalets";
   googleKeyFields.hidden = provider !== "googleOfficial";
   openaiKeyFields.hidden = provider !== "openai";
+}
+
+function normalizeTranslationProvider(provider) {
+  return provider === "openai" ? "openai" : "googleOfficial";
 }
 
 async function saveSettings() {
   const yourLanguage = yourLanguageSelect.value || DEFAULT_YOUR_LANGUAGE;
   const contactLanguage = contactLanguageSelect.value || DEFAULT_CONTACT_LANGUAGE;
-  const translationProvider = translationProviderSelect.value || "vitalets";
+  const translationProvider = normalizeTranslationProvider(translationProviderSelect.value);
   const openaiApiKey = openaiApiKeyInput.value.trim();
   const googleCloudApiKey = googleCloudApiKeyInput.value.trim();
   const translationEnabled = translationEnabledInput.checked;

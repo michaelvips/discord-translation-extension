@@ -44,10 +44,9 @@ Ela nao usa APIs internas de envio do Discord.
 
 ## Traducao
 
-A extensao oferece tres backends:
+A extensao oferece dois backends:
 
 - **OpenAI** usa a Responses API com `gpt-4.1-mini`.
 - **Google Translate API oficial** usa Google Cloud Translation Basic/v2.
-- **Google nao oficial (@vitalets)** usa `@vitalets/google-translate-api` empacotado no background script.
 
-O modo `@vitalets` usa um endpoint nao oficial do Google Translate, entao pode gerar erro 429, bloqueio temporario por trafego incomum ou parar de funcionar se o servico mudar. Para uso frequente, prefira OpenAI ou Google Translate API oficial com cotas e limites configurados.
+O endpoint nao oficial do Google Translate foi removido para evitar erro 429, bloqueio temporario por trafego incomum e instabilidade futura. Configure cotas e limites no provedor escolhido para controlar custos.
