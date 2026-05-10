@@ -5,6 +5,8 @@ Ela tenta aplicar a traducao direto no campo e usa a area de transferencia como 
 
 <img src="docs/popup-screenshot.png" alt="Popup da extensao Discord Translator">
 
+<img src="docs/in-action.gif" alt="Extensao Discord Translator em funcionamento">
+
 ## Instalacao
 
 1. Abra o Chrome e acesse `chrome://extensions`.
