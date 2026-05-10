@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Discord Translator NODEJS",
+  "description": "Translate the Discord message composer before sending.",
+  "version": "1.0.0",
+  "permissions": ["storage", "clipboardWrite"],
+  "host_permissions": [
+    "https://discord.com/*",
+    "https://canary.discord.com/*",
+    "https://ptb.discord.com/*",
+    "https://translate.google.com/*",
+    "https://translation.googleapis.com/*",
+    "https://api.openai.com/*"
+  ],
+  "action": {
+    "default_title": "Discord Translator NODEJS",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "dist/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://discord.com/*",
+        "https://canary.discord.com/*",
+        "https://ptb.discord.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

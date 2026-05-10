@@ -1,0 +1,228 @@
+:root {
+  color-scheme: light dark;
+  --page-bg: #ffffff;
+  --text: #020b18;
+  --muted-text: #142033;
+  --field-bg: #ffffff;
+  --field-border: #c9d1dc;
+  --placeholder: #6f7f93;
+  --focus: #0b72ef;
+  --focus-ring: rgba(11, 114, 239, 0.14);
+  --switch-bg: #d3d9e2;
+  --switch-knob: #ffffff;
+  --switch-shadow: rgba(2, 11, 24, 0.24);
+  --card-bg: #f7faff;
+  --card-border: #d9e1ec;
+  --kbd-bg: #ffffff;
+  --kbd-border: #c6d0dd;
+  --kbd-border-bottom: #aeb9c8;
+  --button-bg: #0b72ef;
+  --button-hover-bg: #095ec4;
+  --button-text: #ffffff;
+  --status: #155db2;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page-bg: #0f1724;
+    --text: #eef6ff;
+    --muted-text: #d3e4f7;
+    --field-bg: #172234;
+    --field-border: #34445a;
+    --placeholder: #8da2bb;
+    --focus: #39a7ff;
+    --focus-ring: rgba(57, 167, 255, 0.22);
+    --switch-bg: #314258;
+    --switch-knob: #f4f9ff;
+    --switch-shadow: rgba(0, 0, 0, 0.42);
+    --card-bg: #121d2d;
+    --card-border: #2c3d54;
+    --kbd-bg: #1d2a3d;
+    --kbd-border: #41536c;
+    --kbd-border-bottom: #596a82;
+    --button-bg: #178bff;
+    --button-hover-bg: #3ba0ff;
+    --button-text: #ffffff;
+    --status: #9bd0ff;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 364px;
+  margin: 0;
+  background: var(--page-bg);
+  color: var(--text);
+}
+
+main {
+  display: grid;
+  gap: 12px;
+  padding: 18px 20px;
+}
+
+h1 {
+  margin: 0 0 2px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+label {
+  font-size: 16px;
+  font-weight: 650;
+  color: var(--text);
+}
+
+input,
+select {
+  width: 100%;
+  min-height: 36px;
+  border: 1px solid var(--field-border);
+  border-radius: 6px;
+  background: var(--field-bg);
+  color: var(--text);
+  font: inherit;
+  padding: 7px 16px;
+  outline: none;
+}
+
+.provider-fields {
+  display: grid;
+  gap: 8px;
+}
+
+.hint {
+  margin: -4px 0 0;
+  color: var(--muted-text);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.setting-row {
+  display: grid;
+  gap: 7px;
+  font-size: 16px;
+  color: var(--text);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 30px;
+}
+
+.switch input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--switch-bg);
+  cursor: pointer;
+  transition: background 0.16s ease;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  top: 4px;
+  left: 4px;
+  border-radius: 50%;
+  background: var(--switch-knob);
+  box-shadow: 0 1px 4px var(--switch-shadow);
+  transition: transform 0.16s ease;
+}
+
+.switch input:checked + .slider {
+  background: var(--button-bg);
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(20px);
+}
+
+.switch input:focus-visible + .slider {
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.usage-card {
+  display: grid;
+  gap: 8px;
+  margin-top: 2px;
+  padding: 12px;
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  background: var(--card-bg);
+  color: var(--muted-text);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.usage-card strong {
+  font-size: 14px;
+}
+
+.usage-card ol {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.usage-card kbd {
+  display: inline-block;
+  min-width: 20px;
+  padding: 1px 5px;
+  border: 1px solid var(--kbd-border);
+  border-bottom-color: var(--kbd-border-bottom);
+  border-radius: 4px;
+  background: var(--kbd-bg);
+  color: var(--text);
+  font: 12px ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  text-align: center;
+}
+
+button {
+  min-height: 38px;
+  margin-top: 2px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--button-bg);
+  color: var(--button-text);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--button-hover-bg);
+}
+
+#status {
+  min-height: 18px;
+  margin: 0;
+  color: var(--status);
+  font-size: 12px;
+}

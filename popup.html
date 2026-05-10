@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Discord Translator NODEJS</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Discord Translator NODEJS</h1>
+
+      <label for="your-language">Seu Idioma</label>
+      <select id="your-language"></select>
+
+      <label for="contact-language">Idioma do Contato</label>
+      <select id="contact-language"></select>
+
+      <label for="translation-provider">Serviço de tradução</label>
+      <select id="translation-provider">
+        <option value="vitalets">Google não oficial (@vitalets)</option>
+        <option value="googleOfficial">Google Translate API oficial</option>
+        <option value="openai">OpenAI</option>
+      </select>
+
+      <p id="vitalets-warning" class="hint provider-help">
+        Pode gerar 429 ou bloqueio temporário no Google Translate.
+      </p>
+
+      <div id="google-key-fields" class="provider-fields" hidden>
+        <label for="google-cloud-api-key">Google Cloud API Key</label>
+        <input id="google-cloud-api-key" type="password" autocomplete="off" />
+      </div>
+
+      <div id="openai-key-fields" class="provider-fields" hidden>
+        <label for="openai-api-key">OpenAI API Key</label>
+        <input id="openai-api-key" type="password" autocomplete="off" />
+      </div>
+
+      <div class="setting-row">
+        <span id="translation-enabled-label">Ativar Tradução</span>
+        <label class="switch" aria-labelledby="translation-enabled-label">
+          <input id="translation-enabled" type="checkbox" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="usage-card">
+        <strong>Como usar</strong>
+        <ol>
+          <li>Digite a mensagem no Discord.</li>
+          <li>Pressione <kbd>Alt</kbd> + <kbd>T</kbd>.</li>
+          <li>Revise a tradução no campo antes de enviar.</li>
+        </ol>
+      </div>
+
+      <button id="save" type="button">Salvar</button>
+      <p id="status" aria-live="polite"></p>
+    </main>
+
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>
