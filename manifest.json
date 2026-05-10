@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Discord Translator NODEJS",
+  "name": "Discord Translator",
   "description": "Translate the Discord message composer before sending.",
   "version": "1.0.0",
   "permissions": ["storage", "clipboardWrite"],
@@ -12,11 +12,12 @@
     "https://api.openai.com/*"
   ],
   "action": {
-    "default_title": "Discord Translator NODEJS",
+    "default_title": "Discord Translator",
     "default_popup": "popup.html"
   },
   "background": {
-    "service_worker": "dist/background.js"
+    "service_worker": "src/background.js",
+    "type": "module"
   },
   "content_scripts": [
     {

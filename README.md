@@ -1,4 +1,4 @@
-# Discord Translator NODEJS
+# Discord Translator
 
 Extensao do Chrome que traduz o rascunho atual da mensagem no Discord antes do envio.
 Ela tenta aplicar a traducao direto no campo e usa a area de transferencia como fallback.
@@ -7,20 +7,17 @@ Ela tenta aplicar a traducao direto no campo e usa a area de transferencia como 
 
 ## Instalacao
 
-1. Instale as dependencias com `npm install`.
-2. Gere o background empacotado com `npm run build`.
-3. Abra o Chrome e acesse `chrome://extensions`.
-4. Ative o **Modo do desenvolvedor**.
-5. Clique em **Carregar sem compactacao**.
-6. Selecione esta pasta do projeto.
-7. Abra o popup da extensao.
-8. Escolha seu idioma, escolha o idioma do contato, escolha o servico de traducao e ative a traducao.
-9. Abra ou recarregue `https://discord.com/app` ou `https://discord.com/channels/@me`.
+1. Abra o Chrome e acesse `chrome://extensions`.
+2. Ative o **Modo do desenvolvedor**.
+3. Clique em **Carregar sem compactacao**.
+4. Selecione esta pasta do projeto.
+5. Abra o popup da extensao.
+6. Escolha seu idioma, escolha o idioma do contato, escolha o servico de traducao e ative a traducao.
+7. Abra ou recarregue `https://discord.com/app` ou `https://discord.com/channels/@me`.
 
 ## Desenvolvimento
 
-Depois de alterar `src/background.js`, rode `npm run build` novamente para atualizar `dist/background.js`.
-Para visualizar o popup pelo navegador, rode `npm run preview` e abra `http://127.0.0.1:4173/popup.html`.
+A extensao nao precisa de Node, npm ou build. O Chrome carrega os arquivos diretamente a partir do `manifest.json`.
 
 ## Como usar
 
